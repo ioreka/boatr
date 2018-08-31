@@ -16,16 +16,6 @@ class MyMap extends React.Component {
     console.log("my markers, in state:",this.state.myMarkers);
   }
 
-  openNavBar() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-  }
-
-  closeNavBar() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-  }
-
   render() {
     let myPins = this.state.myMarkers.map(marker => {
       return (<Marker

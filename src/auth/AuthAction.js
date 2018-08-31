@@ -3,8 +3,8 @@ import React from 'react'
 class AuthAction extends React.Component {
 
   state = {
-    current_user: "",
-    password: ""
+    username: '',
+    password: ''
   }
 
   onValueChange = (e) => {
@@ -17,7 +17,17 @@ class AuthAction extends React.Component {
   render() {
     return (
       <React.Fragment>
-      <h1>{this.props.header}</h1>
+        <div id="AuthAction">
+          <h1>{this.props.header}</h1>
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              this.props.submit(this.state.username, this.state.password)
+            }}>
+              <input type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.onValueChange} /><br/><br/>
+              <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.onValueChange} /><br/><br/>
+              <input type="submit" />
+            </form>
+        </div>
       </React.Fragment>
     )
   }
