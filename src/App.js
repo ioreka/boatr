@@ -13,7 +13,8 @@ class App extends Component {
 
   state = {
     myMarkers: [],
-    current_user: ""
+    current_user: "",
+    previouslySeenUser: null
   }
 
   //authorisation section
@@ -63,10 +64,39 @@ class App extends Component {
     }
   }
 
+  // map methods section
+  saveToMyMarkers = (event) => {
+    if (this.state.current_user) {
+      this.setState({
+        myMarkers:[...this.state.myMarkers, { lat: event.latLng.lat(), lng: event.latLng.lng() }]
+      })
+      console.log("my markers, in state:",this.state.myMarkers);
+      this.setMarkers()
+      console.log("setMarkers called");
+    }
+  }
+
+  setMarkers = () => {
+    setUserMarkers(this.state.current_user.id, localStorage.getItem('token'), this.state.myMarkers)
+  }
+
+  fetchMyMarkers = () => {
+  if (this.state.current_user && this.state.current_user !== this.state.previouslySeenUser) {
+    getUserMarkers(this.state.current_user.id, localStorage.getItem('token'))
+    .then(markers => {
+      this.setState({
+        myMarkers: markers,
+        previouslySeenUser: this.state.current_user
+      })
+    })
+    }
+  }
+
 
   //render section
 
   render() {
+    this.fetchMyMarkers()
     const isLoggedIn = this.state.current_user
     return (
       <div className="App">
@@ -75,7 +105,7 @@ class App extends Component {
             return (
               <React.Fragment>
                 <NavBar current_user={this.state.current_user} logOut={this.logOut}/>
-                <Map />
+                <Map saveToMyMarkers={this.saveToMyMarkers} myMarkers={this.state.myMarkers}/>
                 {isLoggedIn ? null : <AlertBox />}
               </React.Fragment>
             )

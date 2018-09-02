@@ -36,12 +36,26 @@ const getCurrentUser = (token) => {
   }).then(resp => resp.json())
 }
 
-const getUserMarkers = (id, token) =>{
-
+const getUserMarkers = (id, token) => {
+  return fetch(`${baseURL}/users/${id}/markers`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorisation: token
+    }
+  }).then(resp => resp.json())
 }
 
-const setUserMarkers = (id, token, marker_ids) => {
-
+const setUserMarkers = (id, token, markers) => {
+  return fetch(`${baseURL}/users/${id}/markers`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorisation: token
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      markers
+    })
+  }).then(resp => resp.json())
 }
 
 
