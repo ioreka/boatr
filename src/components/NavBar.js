@@ -35,7 +35,7 @@ class NavBar extends React.Component {
       <React.Fragment>
       <div className="w3-sidebar w3-bar-block w3-light-grey w3-card" styles="width:160px;">
       <div className="logo">
-        <img src={require(`./boatr_logo.png`)} alt="boatr_logo"/>
+        <img src={require(`../images/boatrLogo.png`)} alt="boatr_logo"/>
       </div>
         <AuthBox current_user={this.props.current_user}/>
 
@@ -71,7 +71,7 @@ class NavBar extends React.Component {
          <p>
          Help
          {
-           //This app is for guidance only. Liaise with the Canal & River Trust for your officially recorded movements! 
+           //This app is for guidance only. Liaise with the Canal & River Trust for your officially recorded movements!
          }
          </p>
 

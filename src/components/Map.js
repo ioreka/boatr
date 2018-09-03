@@ -2,8 +2,8 @@ import React from "react"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import sectionMarkers from './sectionMarkers'
-import RubberDuck from './RubberDuck.png'
-import CARTLogo from './CARTLogo.png'
+import RubberDuck from '../images/RubberDuck.png'
+import CARTLogo from '../images/CARTLogo.png'
 
 // import saveToMyMarkers from './App'
 // import Pin from './Pin'

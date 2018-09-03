@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker } from './adapter/Adapter'
-import Map from './Map'
-import NavBar from './NavBar'
+import Map from './components/Map'
+import NavBar from './components/NavBar'
 import AuthAction from './auth/AuthAction'
-import AlertBox from './AlertBox'
+import AlertBox from './components/AlertBox'
 import './App.css'
 
 // import { connect } from 'react-redux'
