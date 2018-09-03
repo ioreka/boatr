@@ -45,7 +45,7 @@ const getUserMarkers = (id, token) => {
   }).then(resp => resp.json())
 }
 
-const setUserMarkers = (id, token, markers) => {
+const addUserMarker = (id, token, marker) => {
   return fetch(`${baseURL}/users/${id}/markers`, {
     headers: {
       'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const setUserMarkers = (id, token, markers) => {
     },
     method: 'POST',
     body: JSON.stringify({
-      markers
+      marker
     })
   }).then(resp => resp.json())
 }
@@ -64,5 +64,5 @@ export {
   loginUser,
   getCurrentUser,
   getUserMarkers,
-  setUserMarkers
+  addUserMarker
 }

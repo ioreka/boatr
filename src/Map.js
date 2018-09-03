@@ -1,7 +1,7 @@
 import React from "react"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-import saveToMyMarkers from './App'
+// import saveToMyMarkers from './App'
 // import Pin from './Pin'
 
 
@@ -10,7 +10,7 @@ class MyMap extends React.Component {
   render() {
     let mySavedMarkers = this.props.myMarkers.map(marker => {
       return (<Marker
-        key={marker.lat}
+        key={marker.id}
         position={marker}
       />)
       })

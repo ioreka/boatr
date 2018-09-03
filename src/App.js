@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
-import { createUser, loginUser, getCurrentUser, getUserMarkers, setUserMarkers } from './adapter/Adapter'
+import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker } from './adapter/Adapter'
 import Map from './Map'
 import NavBar from './NavBar'
 import AuthAction from './auth/AuthAction'
@@ -66,18 +66,17 @@ class App extends Component {
 
   // map methods section
   saveToMyMarkers = (event) => {
+    let body = {lat: event.latLng.lat(), lng: event.latLng.lng()}
     if (this.state.current_user) {
+      addUserMarker(this.state.current_user.id, localStorage.getItem('token'), body).then(data => {
       this.setState({
-        myMarkers:[...this.state.myMarkers, { lat: event.latLng.lat(), lng: event.latLng.lng() }]
-      })
-      console.log("my markers, in state:",this.state.myMarkers);
-      this.setMarkers()
-      console.log("setMarkers called");
+        myMarkers:[...this.state.myMarkers, data]
+      })})
     }
   }
 
   setMarkers = () => {
-    setUserMarkers(this.state.current_user.id, localStorage.getItem('token'), this.state.myMarkers)
+    return addUserMarker(this.state.current_user.id, localStorage.getItem('token'), this.state.myMarkers)
   }
 
   fetchMyMarkers = () => {
