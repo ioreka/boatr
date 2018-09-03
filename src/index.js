@@ -7,6 +7,7 @@ import { BrowserRouter, withRouter } from 'react-router-dom'
 // import { createStore } from 'redux'
 // import reducer from './reducer'
 import registerServiceWorker from './registerServiceWorker'
+require('dotenv').config()
 
 // const store = createStore(reducer)
 

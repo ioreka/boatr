@@ -3,6 +3,8 @@ import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import sectionMarkers from './sectionMarkers'
 import RubberDuck from './RubberDuck.png'
+import CARTLogo from './CARTLogo.png'
+
 // import saveToMyMarkers from './App'
 // import Pin from './Pin'
 
@@ -14,6 +16,11 @@ class MyMap extends React.Component {
       return (<Marker
       key={sectionMarker.lat}
       position={sectionMarker}
+      options={
+        {icon: CARTLogo,
+         scaledSize: { width: 20, height: 20 }
+        }
+      }
       />)
     })
 
@@ -47,7 +54,7 @@ class MyMap extends React.Component {
 
 const Map = compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyD9QQqawxTt2ouxuf917rLOqz-5RLn0W5A&v=3.exp&libraries=geometry,drawing,places",
+    googleMapURL: process.env.REACT_APP_API_URL,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `900px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
