@@ -13,6 +13,7 @@ class App extends Component {
 
   state = {
     myMarkers: [],
+    // sectionMarkers: [],
     current_user: "",
     previouslySeenUser: null
   }
@@ -38,7 +39,7 @@ class App extends Component {
   }
 
   logOut = () => {
-    alert("Thanks for using Boatr! See you again soon <3")
+    // alert("Thanks for using Boatr! See you again soon <3")
     this.setState({
       current_user: null
     })
@@ -104,7 +105,7 @@ class App extends Component {
             return (
               <React.Fragment>
                 <NavBar current_user={this.state.current_user} logOut={this.logOut}/>
-                <Map saveToMyMarkers={this.saveToMyMarkers} myMarkers={this.state.myMarkers}/>
+                <Map saveToMyMarkers={this.saveToMyMarkers} myMarkers={this.state.myMarkers} sectionMarkers={this.state.sectionMarkers}/>
                 {isLoggedIn ? null : <AlertBox />}
               </React.Fragment>
             )

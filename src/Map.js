@@ -1,6 +1,7 @@
 import React from "react"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import sectionMarkers from './sectionMarkers'
 // import saveToMyMarkers from './App'
 // import Pin from './Pin'
 
@@ -8,7 +9,15 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 class MyMap extends React.Component {
 
   render() {
+    let displayedSectionMarkers = sectionMarkers.map(sectionMarker => {
+      return (<Marker
+      key={sectionMarker.lat}
+      position={sectionMarker}
+      />)
+    })
+
     let mySavedMarkers = this.props.myMarkers.map(marker => {
+      console.log(marker);
       return (<Marker
         key={marker.id}
         position={marker}
@@ -22,6 +31,7 @@ class MyMap extends React.Component {
         onRightClick={(e) => this.props.saveToMyMarkers(e)}>
 
         {mySavedMarkers}
+        {displayedSectionMarkers}
 
       </GoogleMap>
     )
