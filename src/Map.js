@@ -2,6 +2,7 @@ import React from "react"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import sectionMarkers from './sectionMarkers'
+import RubberDuck from './RubberDuck.png'
 // import saveToMyMarkers from './App'
 // import Pin from './Pin'
 
@@ -21,13 +22,18 @@ class MyMap extends React.Component {
       return (<Marker
         key={marker.id}
         position={marker}
+        options={
+          {icon: RubberDuck,
+           scaledSize: { width: 20, height: 20 }
+          }
+        }
       />)
       })
 
     return (
       <GoogleMap
         defaultZoom={11}
-        defaultCenter={{ lat: 51.52089, lng: -0.08649 }}
+        defaultCenter={{ lat: 51.615831, lng: -0.330991 }}
         onRightClick={(e) => this.props.saveToMyMarkers(e)}>
 
         {mySavedMarkers}
