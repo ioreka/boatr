@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
-import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker } from './adapter/Adapter'
+import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker } from './adapter/Adapter'
 import Map from './components/Map'
 import NavBar from './components/NavBar'
 import AuthAction from './auth/AuthAction'
@@ -92,6 +92,19 @@ class App extends Component {
     }
   }
 
+  updateUserMarker = (e) => {
+//complete this info flow!
+    console.log(e.latLng.lat());
+    console.log(e.latLng.lng());
+    console.log(e);
+    let body = {lat: e.latLng.lat(), lng: e.latLng.lng()}
+    if (this.state.current_user) {
+      updateMarker(this.state.current_user.id, localStorage.getItem('token'), body).then(data => {
+      this.setState({
+        myMarkers:[...this.state.myMarkers, data]
+      })})
+    }
+  }
 
   //render section
 
@@ -104,8 +117,16 @@ class App extends Component {
           <Route path="/home" render={() => {
             return (
               <React.Fragment>
-                <NavBar current_user={this.state.current_user} logOut={this.logOut}/>
-                <Map saveToMyMarkers={this.saveToMyMarkers} myMarkers={this.state.myMarkers} sectionMarkers={this.state.sectionMarkers}/>
+                <NavBar
+                  current_user={this.state.current_user}
+                  logOut={this.logOut}
+                />
+                <Map
+                  saveToMyMarkers={this.saveToMyMarkers}
+                  myMarkers={this.state.myMarkers}
+                  sectionMarkers={this.state.sectionMarkers}
+                  updateUserMarker={this.updateUserMarker}
+                />
                 {isLoggedIn ? null : <AlertBox />}
               </React.Fragment>
             )

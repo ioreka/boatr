@@ -58,11 +58,25 @@ const addUserMarker = (id, token, marker) => {
   }).then(resp => resp.json())
 }
 
+const updateMarker = (id, token, marker) => {
+  return fetch(`${baseURL}/users/${id}/markers`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorisation: token
+    },
+    method: 'PATCH',
+    body: JSON.stringify({
+      marker
+    })
+  }).then(resp => resp.json())
+}
+
 
 export {
   createUser,
   loginUser,
   getCurrentUser,
   getUserMarkers,
-  addUserMarker
+  addUserMarker,
+  updateMarker
 }

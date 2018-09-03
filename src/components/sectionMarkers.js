@@ -1,4 +1,3 @@
-import React from 'react'
 
 const sectionMarkers = [
 
@@ -6,7 +5,7 @@ const sectionMarkers = [
  { lat: 51.74427, lng: -0.48773 },
  { lat: 51.74262, lng: -0.47318 },
  { lat: 51.73611, lng: -0.46348 },
- { lat: 51.72992, lng: -0.45404 },
+ { lat: 51.72993, lng: -0.45404 },
  { lat: 51.72173, lng: -0.44958 },
  { lat: 51.71389, lng: -0.44443 },
  { lat: 51.70541, lng: -0.44207 },

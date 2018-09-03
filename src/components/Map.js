@@ -4,12 +4,11 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 import sectionMarkers from './sectionMarkers'
 import RubberDuck from '../images/RubberDuck.png'
 import CARTLogo from '../images/CARTLogo.png'
-
-// import saveToMyMarkers from './App'
-// import Pin from './Pin'
+// import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel'
 
 
 class MyMap extends React.Component {
+
 
   render() {
     let displayedSectionMarkers = sectionMarkers.map(sectionMarker => {
@@ -24,11 +23,13 @@ class MyMap extends React.Component {
       />)
     })
 
+
     let mySavedMarkers = this.props.myMarkers.map(marker => {
-      console.log(marker);
       return (<Marker
-        key={marker.id}
+        key={marker.lat}
         position={marker}
+        draggable={true}
+        onDragEnd={this.props.updateUserMarker}
         options={
           {icon: RubberDuck,
            scaledSize: { width: 20, height: 20 }
@@ -37,14 +38,18 @@ class MyMap extends React.Component {
       />)
       })
 
+      // markerWithLabel={window.MarkerWithLabel}
+      // labelContent={`yooooooo`}
+      // labelClass={'map-marker-icon'}
+
     return (
       <GoogleMap
         defaultZoom={11}
         defaultCenter={{ lat: 51.615831, lng: -0.330991 }}
         onRightClick={(e) => this.props.saveToMyMarkers(e)}>
 
-        {mySavedMarkers}
         {displayedSectionMarkers}
+        {mySavedMarkers}
 
       </GoogleMap>
     )
