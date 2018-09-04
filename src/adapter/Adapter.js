@@ -58,16 +58,17 @@ const addUserMarker = (id, token, marker) => {
   }).then(resp => resp.json())
 }
 
-const updateMarker = (id, token, marker) => {
-  return fetch(`${baseURL}/users/${id}/markers`, {
+const updateMarker = (id, token, marker, newCoordinates) => {
+  console.log(marker);
+  return fetch(`${baseURL}/users/${id}/markers/${marker.id}`, {
     headers: {
       'Content-Type': 'application/json',
       Authorisation: token
     },
     method: 'PATCH',
-    body: JSON.stringify({
-      marker
-    })
+    body: JSON.stringify(
+      newCoordinates
+    )
   }).then(resp => resp.json())
 }
 

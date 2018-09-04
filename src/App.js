@@ -92,16 +92,16 @@ class App extends Component {
     }
   }
 
-  updateUserMarker = (e) => {
+  updateUserMarker = (e, marker) => {
 //complete this info flow!
-    console.log(e.latLng.lat());
-    console.log(e.latLng.lng());
-    console.log(e);
-    let body = {lat: e.latLng.lat(), lng: e.latLng.lng()}
+    let newCoordinates = {lat: e.latLng.lat(), lng: e.latLng.lng()}
     if (this.state.current_user) {
-      updateMarker(this.state.current_user.id, localStorage.getItem('token'), body).then(data => {
+      updateMarker(this.state.current_user.id, localStorage.getItem('token'), marker, newCoordinates).then(newCoordinates => {
+        console.log(this.state.myMarkers);
+        let newMarkers = this.state.myMarkers.filter(duck => duck.id !== marker.id)
+        newMarkers = [...newMarkers, newCoordinates]
       this.setState({
-        myMarkers:[...this.state.myMarkers, data]
+        myMarkers:newMarkers
       })})
     }
   }

@@ -9,27 +9,41 @@ import CARTLogo from '../images/CARTLogo.png'
 
 class MyMap extends React.Component {
 
+  getMarkerId(e) {
+    console.log("ondragstart event:", e);
+    console.log("ondragstart this:", this);
+  }
+
+  onClick() {
+    //eventually hook this up to display a comment
+    console.log("onclick thing:", this);
+  }
+
 
   render() {
     let displayedSectionMarkers = sectionMarkers.map(sectionMarker => {
-      return (<Marker
-      key={sectionMarker.lat}
-      position={sectionMarker}
-      options={
-        {icon: CARTLogo,
-         scaledSize: { width: 20, height: 20 }
-        }
-      }
-      />)
+      return (
+          <Marker
+            key={sectionMarker.lat}
+            position={sectionMarker}
+            options={
+              {icon: CARTLogo,
+               scaledSize: { width: 20, height: 20 }
+              }
+            }
+        />
+      )
     })
 
-
+    console.log('map this.props.mymarkers', this.props.myMarkers);
     let mySavedMarkers = this.props.myMarkers.map(marker => {
       return (<Marker
         key={marker.lat}
         position={marker}
         draggable={true}
-        onDragEnd={this.props.updateUserMarker}
+        onClick={this.onClick}
+        onDragStart={this.getMarkerId}
+        onDragEnd={(event) => this.props.updateUserMarker(event, marker)}
         options={
           {icon: RubberDuck,
            scaledSize: { width: 20, height: 20 }
