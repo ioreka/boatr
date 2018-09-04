@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
-import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker } from './adapter/Adapter'
+import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker } from './adapter/Adapter'
 import Map from './components/Map'
 import NavBar from './components/NavBar'
 import AuthAction from './auth/AuthAction'
@@ -93,18 +93,30 @@ class App extends Component {
   }
 
   updateUserMarker = (e, marker) => {
-//complete this info flow!
     let newCoordinates = {lat: e.latLng.lat(), lng: e.latLng.lng()}
     if (this.state.current_user) {
       updateMarker(this.state.current_user.id, localStorage.getItem('token'), marker, newCoordinates).then(newCoordinates => {
-        console.log(this.state.myMarkers);
         let newMarkers = this.state.myMarkers.filter(duck => duck.id !== marker.id)
         newMarkers = [...newMarkers, newCoordinates]
       this.setState({
-        myMarkers:newMarkers
+        myMarkers: newMarkers
       })})
     }
   }
+
+  deleteUserMarker = (marker) => {
+  if (this.state.current_user.id === marker.user_id) {
+      deleteMarker(this.state.current_user.id, localStorage.getItem('token'), marker)
+      .then(updatedMarkers => {
+        this.setState({
+          myMarkers: updatedMarkers
+        })
+      })
+    }
+  }
+
+
+
 
   //render section
 
@@ -126,6 +138,7 @@ class App extends Component {
                   myMarkers={this.state.myMarkers}
                   sectionMarkers={this.state.sectionMarkers}
                   updateUserMarker={this.updateUserMarker}
+                  deleteUserMarker={this.deleteUserMarker}
                 />
                 {isLoggedIn ? null : <AlertBox />}
               </React.Fragment>

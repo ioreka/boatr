@@ -59,7 +59,6 @@ const addUserMarker = (id, token, marker) => {
 }
 
 const updateMarker = (id, token, marker, newCoordinates) => {
-  console.log(marker);
   return fetch(`${baseURL}/users/${id}/markers/${marker.id}`, {
     headers: {
       'Content-Type': 'application/json',
@@ -73,11 +72,26 @@ const updateMarker = (id, token, marker, newCoordinates) => {
 }
 
 
+const deleteMarker = (id, token, marker) => {
+  return fetch(`${baseURL}/users/${id}/markers/${marker.id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorisation: token
+    },
+    method: 'DELETE',
+    body: JSON.stringify({
+      marker
+    })
+  }).then(resp => resp.json())
+}
+
+
 export {
   createUser,
   loginUser,
   getCurrentUser,
   getUserMarkers,
   addUserMarker,
-  updateMarker
+  updateMarker,
+  deleteMarker
 }

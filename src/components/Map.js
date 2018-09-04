@@ -58,21 +58,20 @@ class MyMap extends React.Component {
                 }>
                 {this.state.selectedMarker === marker &&
                   <InfoWindow
+                    key={marker.created_at}
                     onCloseClick={() => this.handleToggleClose()}>
                     <div>
                       <div>Date of arrival:</div>
                       <div>Date of departure:</div>
                       <div>Notes:</div>
                       <button>Save</button>
+                      <button onClick={() => this.props.deleteUserMarker(this.state.selectedMarker)}>Remove this Pin</button>
                     </div>
                   </InfoWindow>
                 }
             </Marker>)
       })
 
-      // markerWithLabel={window.MarkerWithLabel}
-      // labelContent={`yooooooo`}
-      // labelClass={'map-marker-icon'}
 
     return (
       <GoogleMap
