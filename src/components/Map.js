@@ -1,23 +1,30 @@
 import React from "react"
 import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 import sectionMarkers from './sectionMarkers'
 import RubberDuck from '../images/RubberDuck.png'
 import CARTLogo from '../images/CARTLogo.png'
-// import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel'
-
 
 class MyMap extends React.Component {
 
-  getMarkerId(e) {
-    console.log("ondragstart event:", e);
-    console.log("ondragstart this:", this);
+  state = {
+     isOpen: false,
+     selectedMarker: false
+   }
+
+   handleClick = (event, marker) => {
+    this.setState({
+      selectedMarker: marker,
+      isOpen: true
+    })
   }
 
-  onClick() {
-    //eventually hook this up to display a comment
-    console.log("onclick thing:", this);
-  }
+
+   handleToggleClose = () => {
+       this.setState({
+           isOpen: false
+       });
+   }
 
 
   render() {
@@ -35,21 +42,32 @@ class MyMap extends React.Component {
       )
     })
 
-    console.log('map this.props.mymarkers', this.props.myMarkers);
+
+
     let mySavedMarkers = this.props.myMarkers.map(marker => {
       return (<Marker
-        key={marker.lat}
-        position={marker}
-        draggable={true}
-        onClick={this.onClick}
-        onDragStart={this.getMarkerId}
-        onDragEnd={(event) => this.props.updateUserMarker(event, marker)}
-        options={
-          {icon: RubberDuck,
-           scaledSize: { width: 20, height: 20 }
-          }
-        }
-      />)
+                key={marker.id}
+                position={marker}
+                draggable={true}
+                onClick={(event) => this.handleClick(event, marker)}
+                onDragEnd={(event) => this.props.updateUserMarker(event, marker)}
+                options={
+                  {icon: RubberDuck,
+                   scaledSize: { width: 20, height: 20 }
+                  }
+                }>
+                {this.state.selectedMarker === marker &&
+                  <InfoWindow
+                    onCloseClick={() => this.handleToggleClose()}>
+                    <div>
+                      <div>Date of arrival:</div>
+                      <div>Date of departure:</div>
+                      <div>Notes:</div>
+                      <button>Save</button>
+                    </div>
+                  </InfoWindow>
+                }
+            </Marker>)
       })
 
       // markerWithLabel={window.MarkerWithLabel}
