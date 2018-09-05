@@ -1,82 +1,88 @@
 import React from 'react'
 import AuthBox from './AuthBox'
 import { Link } from 'react-router-dom'
+import { Input, Label, Menu, Accordion, Icon, Button, Modal, Header } from 'semantic-ui-react'
 
 class NavBar extends React.Component {
 
 
-  myAccFunc() {
-      let x = document.getElementById("demoAcc");
-      if (x.className.indexOf("w3-show") === -1) {
-          x.className += " w3-show";
-          x.previousElementSibling.className += " w3-green";
-      } else {
-          x.className = x.className.replace(" w3-show", "");
-          x.previousElementSibling.className =
-          x.previousElementSibling.className.replace(" w3-green", "");
-      }
+  state = {
+    activeIndex: 0,
+    activeItem: 'inbox'
   }
 
-  myDropFunc() {
-      let x = document.getElementById("demoDrop");
-      if (x.className.indexOf("w3-show") === -1) {
-          x.className += " w3-show";
-          x.previousElementSibling.className += " w3-green";
-      } else {
-          x.className = x.className.replace(" w3-show", "");
-          x.previousElementSibling.className =
-          x.previousElementSibling.className.replace(" w3-green", "");
-      }
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+
+  handleAccordionClick = (e, titleProps) => {
+    const { index } = titleProps
+    const { activeIndex } = this.state
+    const newIndex = activeIndex === index ? -1 : index
+
+    this.setState({ activeIndex: newIndex })
   }
 
 
   render() {
+    const { activeIndex } = this.state
+
     return (
       <React.Fragment>
-      <div className="w3-sidebar w3-bar-block w3-light-grey w3-card" styles="width:160px;">
-      <div className="logo">
-        <img src={require(`../images/boatrLogo.png`)} alt="boatr_logo"/>
-      </div>
-        <AuthBox current_user={this.props.current_user}/>
 
-        <button className="w3-button w3-block w3-left-align" onClick={this.myAccFunc}>
-        Helpful hints<i className="fa fa-caret-down"></i>
-        </button>
-         <div id="demoAcc" className="w3-hide w3-white w3-card">
-           <li>Add a marker using right-click</li>
-           <li>Add a comment by clicking on a marker</li>
-           <li>Remember to save your markers!</li>
+        <Menu vertical>
+          <Menu.Item>
+            <AuthBox current_user={this.props.current_user}/>
+          </Menu.Item>
+
+          <Modal trigger={<Button>What is boatr?</Button>}>
+              <Modal.Header>What is boatr?</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>boatr is designed for continuous cruisers on London's canal network to keep track of their migrations.</Header>
+                  <p>
+                    There are 3 rules for boating:<br/>
+                    <li>The canal is split into 1km length sections, and you must be in a new section every 14 days.</li><br/>
+                    <li>You must not return to the same section within 3 months.</li><br/>
+                    <li>You must cover at least 20 miles, in one direction, over the course of 12 months.</li><br/>
+                  </p>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
+
+            <Modal trigger={<Button>How to use the map</Button>}>
+                <Modal.Header>How to use the map</Modal.Header>
+                <Modal.Content>
+                  <Modal.Description>
+                    <Header>boatr is designed for continuous cruisers on London's canal network to keep track of their migrations.</Header>
+                      <p>
+                        <li>Add a marker using right-click, or (if on a mac) pressing with two fingers</li><br/>
+                        <li>You can zoom in and move the marks as many times as you like!</li><br/>
+                        <li>Add a comment by clicking on a marker</li><br/>
+                      </p>
+                  </Modal.Description>
+                </Modal.Content>
+              </Modal>
+
+              <Modal trigger={<Button>Help</Button>}>
+                <Modal.Header>Help</Modal.Header>
+                <Modal.Content>
+                  <Modal.Description>
+                    <Header>boatr is designed for continuous cruisers on London's canal network to keep track of their migrations.</Header>
+                      <p>
+                      Contact lucy.mitchell@flatironschool.com or the CRT for help with this app and boating respectively :)
+                      </p>
+                  </Modal.Description>
+                </Modal.Content>
+              </Modal>
 
 
-         </div>
+          <Menu.Item>
+            <Input icon='search' placeholder='Search for somewhere...' />
+          </Menu.Item>
 
-         <p>
-         About
-         {
-           //boatr is designed for continuous cruisers on London's canal network to keep track of their migrations.
-           //There are 3 rules for boating:
-           //the canal is split into 1km length sections, and you must be in a new section every 14 days.
-           //You must not return to the same section within 3 months.
-           //You must cover at least 20 miles, in one direction, over the course of 12 months.
-         }
-         </p>
+          <Button onClick={this.props.logOut}>Log out</Button>
 
-         <p>
-         Contact
-          {
-            //lucy.mitchell@flatironschool.com
-          }
-         </p>
-
-         <p>
-         Help
-         {
-           //This app is for guidance only. Liaise with the Canal & River Trust for your officially recorded movements!
-         }
-         </p>
-
-         <Link onClick={this.props.logOut} to="#" className="button" >Log out</Link>
-        </div>
+        </Menu>
 
       </React.Fragment>
     )

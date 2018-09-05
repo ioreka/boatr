@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker, setMarkerComment } from './adapter/Adapter'
+import { Container } from 'semantic-ui-react'
 import Map from './components/Map'
 import NavBar from './components/NavBar'
 import AuthAction from './auth/AuthAction'
@@ -144,21 +145,23 @@ class App extends Component {
         <Switch>
           <Route path="/home" render={() => {
             return (
-              <React.Fragment>
-                <NavBar
-                  current_user={this.state.current_user}
-                  logOut={this.logOut}
-                />
-                <Map
-                  saveToMyMarkers={this.saveToMyMarkers}
-                  myMarkers={this.state.myMarkers}
-                  sectionMarkers={this.state.sectionMarkers}
-                  updateUserMarker={this.updateUserMarker}
-                  deleteUserMarker={this.deleteUserMarker}
-                  addComment={this.addComment}
-                />
-                {isLoggedIn ? null : <AlertBox />}
-              </React.Fragment>
+              <Container fluid>
+                <React.Fragment>
+                  <NavBar
+                    current_user={this.state.current_user}
+                    logOut={this.logOut}
+                  />
+                  <Map
+                    saveToMyMarkers={this.saveToMyMarkers}
+                    myMarkers={this.state.myMarkers}
+                    sectionMarkers={this.state.sectionMarkers}
+                    updateUserMarker={this.updateUserMarker}
+                    deleteUserMarker={this.deleteUserMarker}
+                    addComment={this.addComment}
+                  />
+                  {isLoggedIn ? null : <AlertBox />}
+                </React.Fragment>
+              </Container>
             )
           }} />
           <Route path="/signup" render={() => {

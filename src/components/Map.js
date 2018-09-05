@@ -20,8 +20,6 @@ class MyMap extends React.Component {
   }
 
    handleClick = (event, marker) => {
-     console.log("ya hittin it")
-     console.log(marker);
     this.setState({
       selectedMarker: marker,
       isOpen: true
@@ -30,9 +28,11 @@ class MyMap extends React.Component {
 
 
    handleToggleClose = () => {
+     console.log("ya hittin it");
        this.setState({
-           isOpen: false
-       });
+           isOpen: false,
+           selectedMarker: false
+       })
    }
 
 
@@ -53,6 +53,7 @@ class MyMap extends React.Component {
 
     let mySavedMarkers = this.props.myMarkers.map(marker => {
       return (<MyMarker
+        key={marker.id}
         marker={marker}
         selectedMarker={this.state.selectedMarker}
         handleClick={this.handleClick}
@@ -60,6 +61,7 @@ class MyMap extends React.Component {
         handleUserInputComment={this.handleUserInputComment}
         addComment={this.props.addComment}
         deleteUserMarker={this.props.deleteUserMarker}
+        updateUserMarker={this.props.updateUserMarker}
       />)
     })
 

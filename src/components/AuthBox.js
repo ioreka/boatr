@@ -11,12 +11,12 @@ class AuthBox extends React.Component {
             { this.props.current_user?
               //if current_user is true, renders a welcome message
               <div>
-                Welcome, {this.props.current_user.username}!<br/>
+                Hello, {this.props.current_user.username}!<br/>
               </div>
               :
               //if current_user is false, render the two links
               <React.Fragment>
-                <Link to="/signup" className="button" >Sign up</Link><br/>
+                <Link to="/signup" className4 >Sign up</Link><br/>
                 <Link to="/login" className="button" >Login</Link>
               </React.Fragment>
             }
