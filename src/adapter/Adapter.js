@@ -85,6 +85,19 @@ const deleteMarker = (id, token, marker) => {
   }).then(resp => resp.json())
 }
 
+const setMarkerComment = (id, token, marker, comment) => {
+  return fetch(`${baseURL}/users/${id}/markers/${marker.id}/comments`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      comment
+    })
+  }).then(resp => resp.json())
+}
+
 
 export {
   createUser,
@@ -93,5 +106,6 @@ export {
   getUserMarkers,
   addUserMarker,
   updateMarker,
-  deleteMarker
+  deleteMarker,
+  setMarkerComment
 }

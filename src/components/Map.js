@@ -1,18 +1,27 @@
 import React from "react"
 import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import MyMarker from './MyMarker'
 import sectionMarkers from './sectionMarkers'
-import RubberDuck from '../images/RubberDuck.png'
 import CARTLogo from '../images/CARTLogo.png'
 
 class MyMap extends React.Component {
 
   state = {
      isOpen: false,
-     selectedMarker: false
+     selectedMarker: false,
+     comment: "",
    }
 
+  handleUserInputComment = (e) => {
+    this.setState({
+      comment: e.target.value
+    })
+  }
+
    handleClick = (event, marker) => {
+     console.log("ya hittin it")
+     console.log(marker);
     this.setState({
       selectedMarker: marker,
       isOpen: true
@@ -35,42 +44,24 @@ class MyMap extends React.Component {
             position={sectionMarker}
             options={
               {icon: CARTLogo,
-               scaledSize: { width: 20, height: 20 }
+               scaledSize: { width: 25, height: 25 }
               }
             }
         />
       )
     })
 
-
-
     let mySavedMarkers = this.props.myMarkers.map(marker => {
-      return (<Marker
-                key={marker.id}
-                position={marker}
-                draggable={true}
-                onClick={(event) => this.handleClick(event, marker)}
-                onDragEnd={(event) => this.props.updateUserMarker(event, marker)}
-                options={
-                  {icon: RubberDuck,
-                   scaledSize: { width: 20, height: 20 }
-                  }
-                }>
-                {this.state.selectedMarker === marker &&
-                  <InfoWindow
-                    key={marker.created_at}
-                    onCloseClick={() => this.handleToggleClose()}>
-                    <div>
-                      <div>Date of arrival:</div>
-                      <div>Date of departure:</div>
-                      <div>Notes:</div>
-                      <button>Save</button>
-                      <button onClick={() => this.props.deleteUserMarker(this.state.selectedMarker)}>Remove this Pin</button>
-                    </div>
-                  </InfoWindow>
-                }
-            </Marker>)
-      })
+      return (<MyMarker
+        marker={marker}
+        selectedMarker={this.state.selectedMarker}
+        handleClick={this.handleClick}
+        handleToggleClose={this.handleToggleClose}
+        handleUserInputComment={this.handleUserInputComment}
+        addComment={this.props.addComment}
+        deleteUserMarker={this.props.deleteUserMarker}
+      />)
+    })
 
 
     return (

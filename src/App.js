@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
-import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker } from './adapter/Adapter'
+import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker, setMarkerComment } from './adapter/Adapter'
 import Map from './components/Map'
 import NavBar from './components/NavBar'
 import AuthAction from './auth/AuthAction'
@@ -13,9 +13,9 @@ class App extends Component {
 
   state = {
     myMarkers: [],
-    // sectionMarkers: [],
     current_user: "",
-    previouslySeenUser: null
+    previouslySeenUser: null,
+    comments: []
   }
 
   //authorisation section
@@ -116,6 +116,22 @@ class App extends Component {
   }
 
 
+  //comments section
+
+  addComment = (marker, comment) => {
+    this.setComments(marker, comment)
+  }
+
+
+  setComments = (marker, comment) => {
+  setMarkerComment(this.state.current_user.id, localStorage.getItem('token'), marker, comment)
+  .then(new_comment => {
+    this.setState({
+      comments: [...this.state.comments, new_comment]
+    })
+  })
+}
+
 
 
   //render section
@@ -139,6 +155,7 @@ class App extends Component {
                   sectionMarkers={this.state.sectionMarkers}
                   updateUserMarker={this.updateUserMarker}
                   deleteUserMarker={this.deleteUserMarker}
+                  addComment={this.addComment}
                 />
                 {isLoggedIn ? null : <AlertBox />}
               </React.Fragment>
