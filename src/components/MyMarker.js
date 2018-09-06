@@ -2,12 +2,14 @@ import React from 'react'
 import { Marker, InfoWindow } from "react-google-maps"
 import RubberDuck from '../images/RubberDuck.png'
 import Sound from 'react-sound'
+import ReactFilestack, { client } from 'filestack-react'
 // import Comments from './Comments'
 
 class MyMarker extends React.Component {
 
   state = {
-     comment: ""
+     comment: "",
+     url: ""
    }
 
    handleUserInputComment = (e) => {
@@ -17,7 +19,25 @@ class MyMarker extends React.Component {
    }
 
 
+   onSuccess = (result) => {
+      this.setState({
+        url: result.filesUploaded[0].url
+      })
+    }
+    onError = (error) => {
+      console.error('error', error);
+  }
+
+
+
 render() {
+  const basicOptions = {
+    accept: 'image/*',
+    fromSources: ['local_file_system'],
+    maxSize: 1024 * 1024,
+    maxFiles: 1,
+  }
+
   let marker = this.props.marker
     return (<Marker
               key={marker.id}
@@ -53,6 +73,18 @@ render() {
                       <button onClick={
                         () => this.props.deleteUserMarker(this.props.selectedMarker)
                       }>Remove this Pin</button>
+
+                      <br/>
+
+                      <ReactFilestack
+                        apikey="AtSQoV36ZQCvExzfn73Q4z"
+                        buttonText="Upload photo of your boat at this location!"
+                        buttonClass="classname"
+                        options={basicOptions}
+                        onSuccess={this.onSuccess}
+                        onError={this.onError}
+                      />
+                      {this.state.url ? <img src={this.state.url}/> : null}
 
                     </div>
                   </InfoWindow>
