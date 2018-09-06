@@ -21,7 +21,7 @@ class AuthBox extends React.Component {
             { this.props.current_user?
               //if current_user is true, renders a welcome message
               <div>
-                Hello, {this.props.current_user.username}!<br/>
+                <h3>Hello, {this.props.current_user.username}!</h3>
               </div>
               :
               //if current_user is false, render the two links
