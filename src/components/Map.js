@@ -68,8 +68,8 @@ class MyMap extends React.Component {
 
     return (
       <GoogleMap
-        defaultZoom={11}
-        defaultCenter={{ lat: 51.615831, lng: -0.330991 }}
+        defaultZoom={11.5}
+        defaultCenter={{ lat: 51.603933, lng: -0.340521 }}
         onRightClick={(e) => this.props.saveToMyMarkers(e)}>
 
         {displayedSectionMarkers}
@@ -85,7 +85,7 @@ const Map = compose(
   withProps({
     googleMapURL: process.env.REACT_APP_API_URL,
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `900px` }} />,
+    containerElement: <div style={{ height: `98vh` }} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withScriptjs,

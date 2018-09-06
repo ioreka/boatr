@@ -1,7 +1,8 @@
 import React from 'react'
 import AuthBox from './AuthBox'
+import boatrLogo from '../images/boatrLogo.png'
 import { Link } from 'react-router-dom'
-import { Input, Menu, Button, Modal, Header } from 'semantic-ui-react'
+import { Input, Menu, Button, Modal, Header, Image } from 'semantic-ui-react'
 
 class NavBar extends React.Component {
 
@@ -11,24 +12,18 @@ class NavBar extends React.Component {
     activeItem: 'inbox'
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-
-  handleAccordionClick = (e, titleProps) => {
-    const { index } = titleProps
-    const { activeIndex } = this.state
-    const newIndex = activeIndex === index ? -1 : index
-
-    this.setState({ activeIndex: newIndex })
-  }
-
 
   render() {
     const { activeIndex } = this.state
 
     return (
-
         <Menu fluid vertical>
+
+          <Menu.Item>
+            <Image src={boatrLogo} size='medium' rounded />
+          </Menu.Item>
+
+
           <Menu.Item>
             <AuthBox
               current_user={this.props.current_user}

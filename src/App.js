@@ -143,7 +143,7 @@ class App extends Component {
     return (
       <div className="App">
               <Container fluid textAlign='center'>
-                <Grid>
+                <Grid padded style={{height: '100vh'}}>
                   <Grid.Column width={3}>
                     <Container fluid>
                       <NavBar
