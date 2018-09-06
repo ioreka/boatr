@@ -23,6 +23,7 @@ class MyMarker extends React.Component {
       this.setState({
         url: result.filesUploaded[0].url
       })
+      console.log(this.state.url);
     }
     onError = (error) => {
       console.error('error', error);
@@ -37,6 +38,10 @@ render() {
     maxSize: 1024 * 1024,
     maxFiles: 1,
   }
+
+  let regex = /.com/i
+  let sentence = this.state.url
+  let newSentence = sentence.replace(regex, '.com/AtSQoV36ZQCvExzfn73Q4z/rounded_corners=blur:0.3/resize=height:200/')
 
   let marker = this.props.marker
     return (<Marker
@@ -76,6 +81,10 @@ render() {
 
                       <br/>
 
+                      {this.state.url ? <img src={newSentence} /> : null}
+
+                      <br/>
+
                       <ReactFilestack
                         apikey="AtSQoV36ZQCvExzfn73Q4z"
                         buttonText="Upload photo of your boat at this location!"
@@ -84,7 +93,14 @@ render() {
                         onSuccess={this.onSuccess}
                         onError={this.onError}
                       />
-                      {this.state.url ? <img src={this.state.url}/> : null}
+
+
+
+
+
+
+
+
 
                     </div>
                   </InfoWindow>
@@ -106,3 +122,20 @@ render() {
 
 
 export default MyMarker
+
+
+
+
+
+
+
+
+// this.state.url => https://cdn.filestackcontent.com/g7pDB4wQTWysvEbXC4k0
+// https://cdn.filestackcontent.com/AtSQoV36ZQCvExzfn73Q4z/rounded_corners=blur:0.3/resize=height:200/g7pDB4wQTWysvEbXC4k0
+// replace '.com' with '.com/AtSQoV36ZQCvExzfn73Q4z/rounded_corners=blur:0.3/resize=height:200/'
+//
+// let regex = /.com/i
+// sentence = {this.state.url}
+// newSentence = sentence.replace(regex, '.com/AtSQoV36ZQCvExzfn73Q4z/rounded_corners=blur:0.3/resize=height:200/')
+//
+// <img src="newSentence" />
