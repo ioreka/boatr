@@ -1,12 +1,9 @@
 import React from 'react'
 import AuthBox from './AuthBox'
 import boatrLogo from '../images/boatrLogo.png'
-import { Link } from 'react-router-dom'
 import { Input, Menu, Button, Modal, Header, Image } from 'semantic-ui-react'
 
 class NavBar extends React.Component {
-
-
   state = {
     activeIndex: 0,
     activeItem: 'inbox'
@@ -14,8 +11,6 @@ class NavBar extends React.Component {
 
 
   render() {
-    const { activeIndex } = this.state
-
     return (
         <Menu fluid vertical>
 

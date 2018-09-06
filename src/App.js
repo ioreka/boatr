@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker, setMarkerComment } from './adapter/Adapter'
 import { Container, Grid } from 'semantic-ui-react'
 import Map from './components/Map'
 import NavBar from './components/NavBar'
-import AuthAction from './auth/AuthAction'
 import AlertBox from './components/AlertBox'
 
 

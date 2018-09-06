@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Icon, Segment, Modal, Header } from 'semantic-ui-react'
+import { Button, Icon, Modal, Header } from 'semantic-ui-react'
 
 class AuthBox extends React.Component {
 
