@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "dotenv": "^6.0.0",
+    "filestack-js": "^1.5.1",
+    "filestack-react": "^2.0.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-google-maps": "^9.4.5",

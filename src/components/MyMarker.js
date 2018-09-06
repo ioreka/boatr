@@ -2,6 +2,7 @@ import React from 'react'
 import { Marker, InfoWindow } from "react-google-maps"
 import RubberDuck from '../images/RubberDuck.png'
 import Sound from 'react-sound'
+// import Comments from './Comments'
 
 class MyMarker extends React.Component {
 
@@ -31,15 +32,12 @@ render() {
               }>
               {this.props.selectedMarker === marker &&
                 <React.Fragment>
+
                   <InfoWindow
                     key={marker.created_at}>
                     <div className="infobox">
-
-                    <button onClick={
-                      () => this.props.handleToggleClose()
-                    }>x</button>
-
                     <label>Notes:</label><br/>
+
                       <textarea
                         rows="7" cols="30"
                         name="comment" value={this.state.comment}
@@ -50,7 +48,7 @@ render() {
 
                       <button onClick={(e) => {
                         this.props.addComment(marker, this.state.comment)
-                      }}>Save notes</button>
+                      }}>Save/update notes</button>
 
                       <button onClick={
                         () => this.props.deleteUserMarker(this.props.selectedMarker)
@@ -69,6 +67,10 @@ render() {
   }
 }
 
+// leave unless you have time to implement the comment model
+// <Comments
+//  comments={this.props.comments}
+//  ev={this.props.mySelectedEvent}/>
 
 
 export default MyMarker

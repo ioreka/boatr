@@ -85,6 +85,8 @@ const deleteMarker = (id, token, marker) => {
   }).then(resp => resp.json())
 }
 
+
+//leave unless you have time to make a comment model argh
 const setMarkerComment = (id, token, marker, comment) => {
   return fetch(`${baseURL}/users/${id}/markers/${marker.id}/comments`, {
     headers: {
@@ -98,6 +100,16 @@ const setMarkerComment = (id, token, marker, comment) => {
   }).then(resp => resp.json())
 }
 
+const getMarkerComments = (id, token, meetup_id) => {
+  return fetch(`${baseURL}/comments?meetup_id=${meetup_id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    },
+    body: meetup_id
+  }).then(resp => resp.json())
+}
+
 
 export {
   createUser,
@@ -107,5 +119,6 @@ export {
   addUserMarker,
   updateMarker,
   deleteMarker,
-  setMarkerComment
+  setMarkerComment,
+  getMarkerComments
 }

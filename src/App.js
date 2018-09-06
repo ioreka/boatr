@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker, setMarkerComment } from './adapter/Adapter'
+import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker, setMarkerComment, getMarkerComments } from './adapter/Adapter'
 import { Container, Grid } from 'semantic-ui-react'
 import Map from './components/Map'
 import NavBar from './components/NavBar'
@@ -116,21 +116,21 @@ class App extends Component {
   }
 
 
-  //comments section
+  //comments section - leave unless you have time to make a comment model arghhh
 
   addComment = (marker, comment) => {
     this.setComments(marker, comment)
   }
 
-
-  setComments = (marker, comment) => {
-  setMarkerComment(this.state.current_user.id, localStorage.getItem('token'), marker, comment)
-  .then(new_comment => {
-    this.setState({
-      comments: [...this.state.comments, new_comment]
+  setComments = (comment) => {
+    setMarkerComment(this.state.current_user.id, localStorage.getItem('token'), comment)
+    .then(new_comment => {
+      this.setState({
+        comments: [...this.state.comments, new_comment]
+      })
     })
-  })
-}
+  }
+
 
 
 
