@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker, setMarkerComment } from './adapter/Adapter'
-import { Container } from 'semantic-ui-react'
+import { Container, Grid } from 'semantic-ui-react'
 import Map from './components/Map'
 import NavBar from './components/NavBar'
 import AuthAction from './auth/AuthAction'
 import AlertBox from './components/AlertBox'
-import './App.css'
+
 
 // import { connect } from 'react-redux'
 
@@ -25,7 +25,7 @@ class App extends Component {
     createUser(username, password).then(this.postAuth)
   }
 
-  login = (username, password) => {
+  logIn = (username, password) => {
     loginUser(username, password).then(this.postAuth)
   }
 
@@ -142,38 +142,33 @@ class App extends Component {
     const isLoggedIn = this.state.current_user
     return (
       <div className="App">
-        <Switch>
-          <Route path="/home" render={() => {
-            return (
-              <Container fluid>
-                <React.Fragment>
-                  <NavBar
-                    current_user={this.state.current_user}
-                    logOut={this.logOut}
-                  />
-                  <Map
-                    saveToMyMarkers={this.saveToMyMarkers}
-                    myMarkers={this.state.myMarkers}
-                    sectionMarkers={this.state.sectionMarkers}
-                    updateUserMarker={this.updateUserMarker}
-                    deleteUserMarker={this.deleteUserMarker}
-                    addComment={this.addComment}
-                  />
-                  {isLoggedIn ? null : <AlertBox />}
-                </React.Fragment>
+              <Container fluid textAlign='center'>
+                <Grid>
+                  <Grid.Column width={3}>
+                    <Container fluid>
+                      <NavBar
+                        current_user={this.state.current_user}
+                        logOut={this.logOut}
+                        logIn={this.logIn}
+                        signUp={this.signUp}
+                      />
+                    </Container>
+                  </Grid.Column>
+
+                  <Grid.Column width={13}>
+                    <Map
+                      saveToMyMarkers={this.saveToMyMarkers}
+                      myMarkers={this.state.myMarkers}
+                      sectionMarkers={this.state.sectionMarkers}
+                      updateUserMarker={this.updateUserMarker}
+                      deleteUserMarker={this.deleteUserMarker}
+                      addComment={this.addComment}
+                    />
+                    {isLoggedIn ? null : <AlertBox />}
+                  </Grid.Column>
+                </Grid>
               </Container>
             )
-          }} />
-          <Route path="/signup" render={() => {
-            return (<AuthAction header="Sign up!" submit={this.signIn} />)
-          }} />
-          <Route path="/login" render={() => {
-            return (<AuthAction header="Log in!" submit={this.login} />)
-          }} />
-          <Route path="/" render={() => {
-             return (<Redirect to="/home" />)
-           }} />
-        </Switch>
       </div>
     );
   }

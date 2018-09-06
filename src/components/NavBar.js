@@ -1,7 +1,7 @@
 import React from 'react'
 import AuthBox from './AuthBox'
 import { Link } from 'react-router-dom'
-import { Input, Label, Menu, Accordion, Icon, Button, Modal, Header } from 'semantic-ui-react'
+import { Input, Menu, Button, Modal, Header } from 'semantic-ui-react'
 
 class NavBar extends React.Component {
 
@@ -27,12 +27,17 @@ class NavBar extends React.Component {
     const { activeIndex } = this.state
 
     return (
-      <React.Fragment>
 
-        <Menu vertical>
+        <Menu fluid vertical>
           <Menu.Item>
-            <AuthBox current_user={this.props.current_user}/>
+            <AuthBox
+              current_user={this.props.current_user}
+              logIn={this.props.logIn}
+              signIn={this.props.signIn}
+              />
           </Menu.Item>
+
+          <p>
 
           <Modal trigger={<Button>What is boatr?</Button>}>
               <Modal.Header>What is boatr?</Modal.Header>
@@ -49,25 +54,32 @@ class NavBar extends React.Component {
               </Modal.Content>
             </Modal>
 
+            </p>
+            { this.props.current_user?
+              <React.Fragment>
+            <p>
+
             <Modal trigger={<Button>How to use the map</Button>}>
                 <Modal.Header>How to use the map</Modal.Header>
                 <Modal.Content>
                   <Modal.Description>
-                    <Header>boatr is designed for continuous cruisers on London's canal network to keep track of their migrations.</Header>
-                      <p>
-                        <li>Add a marker using right-click, or (if on a mac) pressing with two fingers</li><br/>
-                        <li>You can zoom in and move the marks as many times as you like!</li><br/>
-                        <li>Add a comment by clicking on a marker</li><br/>
-                      </p>
+                    <p>
+                      <li>Add a marker using right-click, or (if on a mac) pressing with two fingers</li><br/>
+                      <li>You can zoom in and move the marks as many times as you like!</li><br/>
+                      <li>Add a comment by clicking on a marker</li><br/>
+                    </p>
                   </Modal.Description>
                 </Modal.Content>
               </Modal>
+
+              </p>
+              <p>
 
               <Modal trigger={<Button>Help</Button>}>
                 <Modal.Header>Help</Modal.Header>
                 <Modal.Content>
                   <Modal.Description>
-                    <Header>boatr is designed for continuous cruisers on London's canal network to keep track of their migrations.</Header>
+                    <Header>Need some more help?</Header>
                       <p>
                       Contact lucy.mitchell@flatironschool.com or the CRT for help with this app and boating respectively :)
                       </p>
@@ -75,16 +87,25 @@ class NavBar extends React.Component {
                 </Modal.Content>
               </Modal>
 
+              </p>
 
-          <Menu.Item>
-            <Input icon='search' placeholder='Search for somewhere...' />
-          </Menu.Item>
+              <p>
+              <Button onClick={this.props.logOut}>Log out</Button>
+              </p>
 
-          <Button onClick={this.props.logOut}>Log out</Button>
+              <Menu.Item>
+                <Input icon='search' placeholder='Search for somewhere...' />
+              </Menu.Item>
+              </React.Fragment>
+              :
+              null
+            }
+
+
+
 
         </Menu>
 
-      </React.Fragment>
     )
   }
 
