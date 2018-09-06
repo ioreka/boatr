@@ -20,7 +20,7 @@ class App extends Component {
 
   //authorisation section
 
-  signIn = (username, password) => {
+  signUp = (username, password) => {
     createUser(username, password).then(this.postAuth)
   }
 
@@ -39,11 +39,11 @@ class App extends Component {
   }
 
   logOut = () => {
-    // alert("Thanks for using Boatr! See you again soon <3")
     this.setState({
       current_user: null
     })
-    this.props.history.push('/login')
+    console.log("ya hittin it");
+    this.props.history.push('/')
     localStorage.clear()
   }
 
@@ -105,14 +105,16 @@ class App extends Component {
   }
 
   deleteUserMarker = (marker) => {
-  if (this.state.current_user.id === marker.user_id) {
-      deleteMarker(this.state.current_user.id, localStorage.getItem('token'), marker)
-      .then(updatedMarkers => {
-        this.setState({
-          myMarkers: updatedMarkers
-        })
-      })
-    }
+    if (this.state.current_user) {
+      if (this.state.current_user.id === marker.user_id) {
+          deleteMarker(this.state.current_user.id, localStorage.getItem('token'), marker)
+          .then(updatedMarkers => {
+            this.setState({
+              myMarkers: updatedMarkers
+            })
+          })
+        }
+      }
   }
 
 

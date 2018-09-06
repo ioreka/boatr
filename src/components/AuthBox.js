@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Icon, Modal, Header } from 'semantic-ui-react'
+import { Button, Icon, Modal, Header, Form } from 'semantic-ui-react'
 
 class AuthBox extends React.Component {
 
@@ -16,20 +16,18 @@ class AuthBox extends React.Component {
 
   render () {
     return (
-      <div id="authbox">
+      <div>
 
-            { this.props.current_user?
-              //if current_user is true, renders a welcome message
-              <div>
+            { this.props.current_user ?
+
                 <h3>Hello, {this.props.current_user.username}!</h3>
-              </div>
+
               :
-              //if current_user is false, render the two links
 
               <React.Fragment>
               <p>
 
-                 <Modal trigger={
+                 <Modal size="mini" trigger={
                    <Button animated >
                       <Button.Content visible>Sign Up</Button.Content>
                       <Button.Content hidden>
@@ -40,14 +38,20 @@ class AuthBox extends React.Component {
                        <Modal.Description>
                          <Header>Sign up!</Header>
                          <div id="AuthAction">
-                             <form onSubmit={(e) => {
-                               e.preventDefault()
-                               this.props.signIn(this.state.username, this.state.password)
-                             }}>
-                               <input type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.onValueChange} /><br/><br/>
-                               <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.onValueChange} /><br/><br/>
-                               <input type="submit" />
-                             </form>
+                         <Form onSubmit={(e) => {
+                           e.preventDefault()
+                           this.props.signUp(this.state.username, this.state.password)
+                         }}>
+                            <Form.Field>
+                              <label>Username</label>
+                              <input placeholder="Username" name="username" value={this.state.username} onChange={this.onValueChange} />
+                            </Form.Field>
+                            <Form.Field>
+                              <label>Password</label>
+                              <input placeholder='Password' type="password" name="password" value={this.state.password} onChange={this.onValueChange} />
+                            </Form.Field>
+                            <Button type='submit'>Submit</Button>
+                          </Form>
                          </div>
                        </Modal.Description>
                      </Modal.Content>
@@ -56,7 +60,7 @@ class AuthBox extends React.Component {
 
               <p>
 
-              <Modal trigger={
+              <Modal size="mini" trigger={
                 <Button animated >
                  <Button.Content visible>Log In</Button.Content>
                  <Button.Content hidden>
@@ -67,14 +71,20 @@ class AuthBox extends React.Component {
                     <Modal.Description>
                       <Header>Log in!</Header>
                       <div id="AuthAction">
-                          <form onSubmit={(e) => {
-                            e.preventDefault()
-                            this.props.logIn(this.state.username, this.state.password)
-                          }}>
-                            <input type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.onValueChange} /><br/><br/>
-                            <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.onValueChange} /><br/><br/>
-                            <input type="submit" />
-                          </form>
+                      <Form onSubmit={(e) => {
+                        e.preventDefault()
+                        this.props.logIn(this.state.username, this.state.password)
+                      }}>
+                         <Form.Field>
+                           <label>Username</label>
+                           <input placeholder="Username" name="username" value={this.state.username} onChange={this.onValueChange} />
+                         </Form.Field>
+                         <Form.Field>
+                           <label>Password</label>
+                           <input placeholder='Password' type="password" name="password" value={this.state.password} onChange={this.onValueChange} />
+                         </Form.Field>
+                         <Button type='submit'>Submit</Button>
+                       </Form>
                       </div>
                     </Modal.Description>
                   </Modal.Content>

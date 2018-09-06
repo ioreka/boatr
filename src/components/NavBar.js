@@ -11,6 +11,7 @@ class NavBar extends React.Component {
 
 
   render() {
+
     return (
         <Menu fluid vertical style={{height: '98vh'}}>
           <p>
@@ -24,7 +25,7 @@ class NavBar extends React.Component {
               <AuthBox
                 current_user={this.props.current_user}
                 logIn={this.props.logIn}
-                signIn={this.props.signIn}
+                signUp={this.props.signUp}
                 />
             </Menu.Item>
           </p>
