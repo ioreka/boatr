@@ -2,7 +2,7 @@ import React from 'react'
 import { Marker, InfoWindow } from "react-google-maps"
 import RubberDuck from '../images/RubberDuck.png'
 import Sound from 'react-sound'
-import ReactFilestack, { client } from 'filestack-react'
+import ReactFilestack from 'filestack-react'
 // import Comments from './Comments'
 
 class MyMarker extends React.Component {
@@ -81,7 +81,7 @@ render() {
 
                       <br/>
 
-                      {this.state.url ? <img src={newSentence} /> : null}
+                      {this.state.url ? <img src={newSentence} alt="your boat pic! super cute"/> : null}
 
                       <br/>
 

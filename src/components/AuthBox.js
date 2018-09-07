@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Icon, Modal, Header, Form } from 'semantic-ui-react'
+import { Button, Icon, Modal, Header, Form, Divider } from 'semantic-ui-react'
 
 class AuthBox extends React.Component {
 
@@ -25,8 +25,7 @@ class AuthBox extends React.Component {
               :
 
               <React.Fragment>
-              <p>
-
+              <Divider hidden />
                  <Modal size="mini" trigger={
                    <Button animated >
                       <Button.Content visible>Sign Up</Button.Content>
@@ -56,9 +55,8 @@ class AuthBox extends React.Component {
                        </Modal.Description>
                      </Modal.Content>
                    </Modal>
-              </p>
 
-              <p>
+              <Divider hidden />
 
               <Modal size="mini" trigger={
                 <Button animated >
@@ -91,7 +89,7 @@ class AuthBox extends React.Component {
                 </Modal>
 
 
-              </p>
+              <Divider hidden />
               </React.Fragment>
             }
 
@@ -101,19 +99,3 @@ class AuthBox extends React.Component {
 }
 
 export default AuthBox
-
-//
-// <Button animated as={Link} to='/login'>
-//    <Button.Content visible>Log In</Button.Content>
-//    <Button.Content hidden>
-//      <Icon name='sign in' />
-//    </Button.Content>
-//  </Button>
-//
-//
-//  <Button animated as={Link} to='/signup'>
-//     <Button.Content visible>Sign Up</Button.Content>
-//     <Button.Content hidden>
-//       <Icon name='signup' />
-//     </Button.Content>
-//   </Button>

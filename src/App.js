@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker, setMarkerComment, getMarkerComments } from './adapter/Adapter'
-import { Container, Grid } from 'semantic-ui-react'
+import { Container, Grid, Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
 import Map from './components/Map'
 import NavBar from './components/NavBar'
 import AlertBox from './components/AlertBox'
@@ -15,7 +15,8 @@ class App extends Component {
     myMarkers: [],
     current_user: "",
     previouslySeenUser: null,
-    comments: []
+    comments: [],
+    visible: false
   }
 
   //authorisation section
@@ -119,7 +120,6 @@ class App extends Component {
 
 
   //comments section - leave unless you have time to make a comment model arghhh
-
   addComment = (marker, comment) => {
     this.setComments(marker, comment)
   }
@@ -134,52 +134,58 @@ class App extends Component {
   }
 
 
+  //sidebar section
+  handleButtonClick = () => this.setState({ visible: !this.state.visible })
+  handleSidebarHide = () => this.setState({ visible: false })
+
+
 
 
   //render section
-
   render() {
     this.fetchMyMarkers()
     const isLoggedIn = this.state.current_user
+    const visible = this.state.visible
     return (
-      <div className="App">
-              <Container fluid textAlign='center'>
-                <Grid padded style={{height: '100vh'}}>
-                  <Grid.Column width={3}>
-                    <Container fluid>
-                      <NavBar
-                        current_user={this.state.current_user}
-                        logOut={this.logOut}
-                        logIn={this.logIn}
-                        signUp={this.signUp}
-                      />
-                    </Container>
-                  </Grid.Column>
+      <div>
+        <Button onClick={this.handleButtonClick}>Open menu</Button>
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar
+            as={Menu}
+            animation='overlay'
+            onHide={this.handleSidebarHide}
+            vertical
+            visible={visible}
+          >
+            <Menu.Item as='a'>
+                <NavBar
+                  current_user={this.state.current_user}
+                  logOut={this.logOut}
+                  logIn={this.logIn}
+                  signUp={this.signUp}
+                />
+            </Menu.Item>
+          </Sidebar>
 
-                  <Grid.Column width={13}>
-                    <Map
-                      saveToMyMarkers={this.saveToMyMarkers}
-                      myMarkers={this.state.myMarkers}
-                      sectionMarkers={this.state.sectionMarkers}
-                      updateUserMarker={this.updateUserMarker}
-                      deleteUserMarker={this.deleteUserMarker}
-                      addComment={this.addComment}
-                    />
-                    {isLoggedIn ? null : <AlertBox />}
-                  </Grid.Column>
-                </Grid>
-              </Container>
-            )
-      </div>
+          <Sidebar.Pusher dimmed={visible}>
+            <Segment basic>
+              <Map
+              saveToMyMarkers={this.saveToMyMarkers}
+              myMarkers={this.state.myMarkers}
+              sectionMarkers={this.state.sectionMarkers}
+              updateUserMarker={this.updateUserMarker}
+              deleteUserMarker={this.deleteUserMarker}
+              addComment={this.addComment}
+              />
+              {isLoggedIn ? null : <AlertBox />}
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+        </div>
     );
   }
 }
 
-  // const mapStateToProps = (state) => {
-  //   console.log("APP MSP", state)
-  //   return {
-  //     myMarkers: state.myMarkers
-  //   }
-  // }
+
 
 export default withRouter(App)
