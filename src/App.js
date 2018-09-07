@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker, setMarkerComment, getMarkerComments } from './adapter/Adapter'
-import { Container, Grid, Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, updateMarker, deleteMarker, setMarkerComment } from './adapter/Adapter'
+import { Icon, Button, Menu, Segment, Sidebar } from 'semantic-ui-react'
 import Map from './components/Map'
 import NavBar from './components/NavBar'
 import AlertBox from './components/AlertBox'
@@ -148,7 +148,7 @@ class App extends Component {
     const visible = this.state.visible
     return (
       <div>
-        <Button onClick={this.handleButtonClick}>Open menu</Button>
+
         <Sidebar.Pushable as={Segment}>
           <Sidebar
             as={Menu}
@@ -156,9 +156,13 @@ class App extends Component {
             onHide={this.handleSidebarHide}
             vertical
             visible={visible}
+            width='wide'
+            icon='labeled'
           >
-            <Menu.Item as='a'>
+            <Menu.Item fluid textalign='center'>
                 <NavBar
+                  fluid
+                  textAlign='center'
                   current_user={this.state.current_user}
                   logOut={this.logOut}
                   logIn={this.logIn}
@@ -169,6 +173,7 @@ class App extends Component {
 
           <Sidebar.Pusher dimmed={visible}>
             <Segment basic>
+            <Button size='mini' floated="left" onClick={this.handleButtonClick}><Icon name='angle double left'/></Button>
               <Map
               saveToMyMarkers={this.saveToMyMarkers}
               myMarkers={this.state.myMarkers}

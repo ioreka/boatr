@@ -1,7 +1,7 @@
 import React from 'react'
 import AuthBox from './AuthBox'
 import boatrLogo from '../images/boatrLogo.png'
-import { Input, Menu, Button, Modal, Image, Divider } from 'semantic-ui-react'
+import { Input, Button, Modal, Image, Divider } from 'semantic-ui-react'
 
 class NavBar extends React.Component {
   state = {
@@ -13,24 +13,20 @@ class NavBar extends React.Component {
   render() {
 
     return (
-        <Menu fluid vertical style={{height: '98vh'}}>
-            <Menu.Item>
-              <Image src={boatrLogo} size='medium' rounded />
-            </Menu.Item>
+        <React.Fragment>
+            <Image src={boatrLogo} size='medium' rounded />
 
             <Divider hidden />
 
-            <Menu.Item>
               <AuthBox
                 current_user={this.props.current_user}
                 logIn={this.props.logIn}
                 signUp={this.props.signUp}
                 />
-            </Menu.Item>
 
           <Divider hidden />
 
-          <Menu.Item>
+
             <h4>
               <p>
                 boatr is designed for continuous cruisers on London's canal network to keep track of their migrations.
@@ -42,7 +38,7 @@ class NavBar extends React.Component {
                 <li>You must cover at least 20 miles, in one direction, over the course of 12 months.</li><br/>
               </p>
             </h4>
-          </Menu.Item>
+
 
 
             { this.props.current_user?
@@ -81,17 +77,13 @@ class NavBar extends React.Component {
                   <Button onClick={this.props.logOut}>Log out</Button>
 
                   <Divider hidden />
-                  <Divider hidden />
 
-                  <Menu.Item>
-                    <Input icon='search' placeholder='Search for somewhere...' />
-                  </Menu.Item>
                 </React.Fragment>
               :
               null
             }
 
-        </Menu>
+        </React.Fragment>
     )
   }
 

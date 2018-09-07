@@ -85,7 +85,7 @@ const Map = compose(
   withProps({
     googleMapURL: process.env.REACT_APP_API_URL,
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `98vh` }} />,
+    containerElement: <div style={{ height: `95vh` }} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withScriptjs,

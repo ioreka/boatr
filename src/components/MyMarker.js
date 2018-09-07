@@ -93,21 +93,12 @@ render() {
                         onSuccess={this.onSuccess}
                         onError={this.onError}
                       />
-
-
-
-
-
-
-
-
-
                     </div>
                   </InfoWindow>
 
                   <Sound
-                      url="saltyquack.mp3"
-                      playStatus={Sound.status.PLAYING}
+                    url="saltyquack.mp3"
+                    playStatus={Sound.status.PLAYING}
                   />
                 </React.Fragment>
               }
@@ -122,20 +113,3 @@ render() {
 
 
 export default MyMarker
-
-
-
-
-
-
-
-
-// this.state.url => https://cdn.filestackcontent.com/g7pDB4wQTWysvEbXC4k0
-// https://cdn.filestackcontent.com/AtSQoV36ZQCvExzfn73Q4z/rounded_corners=blur:0.3/resize=height:200/g7pDB4wQTWysvEbXC4k0
-// replace '.com' with '.com/AtSQoV36ZQCvExzfn73Q4z/rounded_corners=blur:0.3/resize=height:200/'
-//
-// let regex = /.com/i
-// sentence = {this.state.url}
-// newSentence = sentence.replace(regex, '.com/AtSQoV36ZQCvExzfn73Q4z/rounded_corners=blur:0.3/resize=height:200/')
-//
-// <img src="newSentence" />
