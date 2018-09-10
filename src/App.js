@@ -118,14 +118,13 @@ class App extends Component {
       }
   }
 
-
-  //comments section - leave unless you have time to make a comment model arghhh
+//comments section
   addComment = (marker, comment) => {
     this.setComments(marker, comment)
   }
 
-  setComments = (comment) => {
-    setMarkerComment(this.state.current_user.id, localStorage.getItem('token'), comment)
+  setComments = (marker, comment) => {
+    setMarkerComment(this.state.current_user.id, localStorage.getItem('token'), marker, comment)
     .then(new_comment => {
       this.setState({
         comments: [...this.state.comments, new_comment]
@@ -181,6 +180,7 @@ class App extends Component {
               updateUserMarker={this.updateUserMarker}
               deleteUserMarker={this.deleteUserMarker}
               addComment={this.addComment}
+              current_user={this.state.current_user}
               />
               {isLoggedIn ? null : <AlertBox />}
             </Segment>

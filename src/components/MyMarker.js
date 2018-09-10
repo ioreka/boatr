@@ -3,6 +3,7 @@ import { Marker, InfoWindow } from "react-google-maps"
 import RubberDuck from '../images/RubberDuck.png'
 import Sound from 'react-sound'
 import ReactFilestack from 'filestack-react'
+import { uploadPhoto } from '../adapter/Adapter'
 // import Comments from './Comments'
 
 class MyMarker extends React.Component {
@@ -13,6 +14,29 @@ class MyMarker extends React.Component {
      firstLoad: true
    }
 
+   componentDidMount() {
+     const comment = this.props.marker.comment || ""
+     const photoURL = this.props.marker.photoURL || ""
+     this.setState({
+       comment: comment,
+       url: photoURL
+     })
+   }
+   //
+   // componentDidUpdate() {
+   //   if (this.state.firstLoad){
+   //     this.setState({
+   //       firstLoad: false
+   //     })
+   //   }
+   // }
+
+   handleFinish = () => {
+     this.setState({
+           firstLoad: false
+         })
+   }
+
    handleUserInputComment = (e) => {
      this.setState({
        comment: e.target.value
@@ -20,22 +44,19 @@ class MyMarker extends React.Component {
    }
 
 
+//photo section
    onSuccess = (result) => {
-      this.setState({
-        url: result.filesUploaded[0].url
-      })
-      console.log(this.state.url);
+     let photoURL = result.filesUploaded[0].url
+     console.log(photoURL);
+     uploadPhoto(this.props.current_user.id, localStorage.getItem('token'), this.props.marker, photoURL)
+     .then(marker => {
+       this.setState({
+         url: marker.photoURL
+       })
+     })
     }
     onError = (error) => {
       console.error('error', error);
-  }
-
-  componentDidUpdate() {
-    if (this.state.firstLoad){
-      this.setState({
-        firstLoad: false
-      })
-    }
   }
 
 
@@ -52,6 +73,7 @@ render() {
   let sentence = this.state.url
   let newSentence = sentence.replace(regex, '.com/AtSQoV36ZQCvExzfn73Q4z/rounded_corners=blur:0.3/resize=height:200/')
   let marker = this.props.marker
+
     return (<Marker
               key={marker.id}
               position={marker}
@@ -69,6 +91,7 @@ render() {
                   <InfoWindow
                     key={marker.created_at}>
                     <div className="infobox">
+
                     <label>Notes:</label><br/>
 
                       <textarea
@@ -89,7 +112,9 @@ render() {
 
                       <br/>
 
-                      {this.state.url ? <img src={newSentence} alt="your boat pic! super cute"/> : null}
+                      {this.state.url ?
+                        <img src={newSentence} alt="your boat pic! super cute"/>
+                        : null}
 
                       <br/>
 
@@ -107,9 +132,11 @@ render() {
 
                 </React.Fragment>
               }
-              {this.state.firstLoad ? <Sound
+             <Sound
+                useConsole = {false}
                 url="saltyquack.mp3"
-                playStatus={Sound.status.PLAYING}
+                playStatus={this.state.firstLoad ? Sound.status.PLAYING : Sound.status.STOPPED}
+                onFinishedPlaying={this.handleFinish}
               /> :
 
               null}

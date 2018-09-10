@@ -55,6 +55,7 @@ class MyMap extends React.Component {
       return (<MyMarker
         key={marker.id}
         marker={marker}
+        current_user={this.props.current_user}
         selectedMarker={this.state.selectedMarker}
         handleClick={this.handleClick}
         handleToggleClose={this.handleToggleClose}

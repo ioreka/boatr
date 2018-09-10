@@ -49,9 +49,9 @@ class NavBar extends React.Component {
                     <Modal.Content>
                       <Modal.Description>
                         <p>
-                          <li>Add a marker using right-click, or (if on a mac) pressing with two fingers</li><br/>
-                          <li>You can zoom in and move the marks as many times as you like!</li><br/>
-                          <li>Add a comment by clicking on a marker</li><br/>
+                          <li>Add a marker by clicking once on the map</li><br/>
+                          <li>Zoom in and out using the trackpad of buttons in the bottom right corner</li><br/>
+                          <li>Add a comment or upload a photo by clicking on an individual marker</li><br/>
                         </p>
                       </Modal.Description>
                     </Modal.Content>

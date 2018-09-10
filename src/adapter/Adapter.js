@@ -65,9 +65,9 @@ const updateMarker = (id, token, marker, newCoordinates) => {
       Authorisation: token
     },
     method: 'PATCH',
-    body: JSON.stringify(
-      newCoordinates
-    )
+    body: JSON.stringify({
+      marker: {newCoordinates}
+    })
   }).then(resp => resp.json())
 }
 
@@ -86,29 +86,43 @@ const deleteMarker = (id, token, marker) => {
 }
 
 
-//leave unless you have time to make a comment model argh
 const setMarkerComment = (id, token, marker, comment) => {
-  return fetch(`${baseURL}/users/${id}/markers/${marker.id}/comments`, {
+  return fetch(`${baseURL}/users/${id}/markers/${marker.id}`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: token
     },
-    method: 'POST',
+    method: 'PATCH',
     body: JSON.stringify({
-      comment
+      marker: {comment}
     })
   }).then(resp => resp.json())
 }
 
-const getMarkerComments = (id, token, meetup_id) => {
-  return fetch(`${baseURL}/comments?meetup_id=${meetup_id}`, {
+const getMarkerComments = (id, token, marker) => {
+  return fetch(`${baseURL}/users/${id}/markers/${marker.id}/comments`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: token
-    },
-    body: meetup_id
+    }
   }).then(resp => resp.json())
 }
+
+const uploadPhoto = (id, token, marker, photoURL) => {
+  return fetch(`${baseURL}/users/${id}/markers/${marker.id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorisation: token
+    },
+    method: 'PATCH',
+    body: JSON.stringify({
+      marker: {photoURL}
+    })
+  }).then(resp => resp.json())
+}
+
+
+
 
 
 export {
@@ -120,5 +134,6 @@ export {
   updateMarker,
   deleteMarker,
   setMarkerComment,
-  getMarkerComments
+  getMarkerComments,
+  uploadPhoto
 }
