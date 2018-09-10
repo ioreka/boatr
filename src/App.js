@@ -159,10 +159,10 @@ class App extends Component {
             width='wide'
             icon='labeled'
           >
-            <Menu.Item fluid textalign='center'>
+            <Menu.Item textalign='center'>
                 <NavBar
                   fluid
-                  textAlign='center'
+                  textalign='center'
                   current_user={this.state.current_user}
                   logOut={this.logOut}
                   logIn={this.logIn}

@@ -1,7 +1,7 @@
 import React from 'react'
 import AuthBox from './AuthBox'
 import boatrLogo from '../images/boatrLogo.png'
-import { Input, Button, Modal, Image, Divider } from 'semantic-ui-react'
+import { Button, Modal, Image, Divider } from 'semantic-ui-react'
 
 class NavBar extends React.Component {
   state = {
