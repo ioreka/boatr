@@ -70,7 +70,7 @@ class MyMap extends React.Component {
       <GoogleMap
         defaultZoom={11.5}
         defaultCenter={{ lat: 51.603933, lng: -0.340521 }}
-        onRightClick={(e) => this.props.saveToMyMarkers(e)}>
+        onClick={(e) => this.props.saveToMyMarkers(e)}>
 
         {displayedSectionMarkers}
         {mySavedMarkers}

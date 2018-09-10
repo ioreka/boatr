@@ -9,7 +9,8 @@ class MyMarker extends React.Component {
 
   state = {
      comment: "",
-     url: ""
+     url: "",
+     firstLoad: true
    }
 
    handleUserInputComment = (e) => {
@@ -29,6 +30,14 @@ class MyMarker extends React.Component {
       console.error('error', error);
   }
 
+  componentDidUpdate() {
+    if (this.state.firstLoad){
+      this.setState({
+        firstLoad: false
+      })
+    }
+  }
+
 
 
 render() {
@@ -42,7 +51,6 @@ render() {
   let regex = /.com/i
   let sentence = this.state.url
   let newSentence = sentence.replace(regex, '.com/AtSQoV36ZQCvExzfn73Q4z/rounded_corners=blur:0.3/resize=height:200/')
-
   let marker = this.props.marker
     return (<Marker
               key={marker.id}
@@ -96,12 +104,15 @@ render() {
                     </div>
                   </InfoWindow>
 
-                  <Sound
-                    url="saltyquack.mp3"
-                    playStatus={Sound.status.PLAYING}
-                  />
+
                 </React.Fragment>
               }
+              {this.state.firstLoad ? <Sound
+                url="saltyquack.mp3"
+                playStatus={Sound.status.PLAYING}
+              /> :
+
+              null}
           </Marker>)
   }
 }
