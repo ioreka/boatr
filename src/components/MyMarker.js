@@ -4,7 +4,7 @@ import RubberDuck from '../images/RubberDuck.png'
 import Sound from 'react-sound'
 import ReactFilestack from 'filestack-react'
 import { uploadPhoto } from '../adapter/Adapter'
-// import Comments from './Comments'
+
 
 class MyMarker extends React.Component {
 
@@ -22,19 +22,11 @@ class MyMarker extends React.Component {
        url: photoURL
      })
    }
-   //
-   // componentDidUpdate() {
-   //   if (this.state.firstLoad){
-   //     this.setState({
-   //       firstLoad: false
-   //     })
-   //   }
-   // }
 
    handleFinish = () => {
      this.setState({
-           firstLoad: false
-         })
+       firstLoad: false
+     })
    }
 
    handleUserInputComment = (e) => {
@@ -44,7 +36,7 @@ class MyMarker extends React.Component {
    }
 
 
-//photo section
+   //photo section
    onSuccess = (result) => {
      let photoURL = result.filesUploaded[0].url
      console.log(photoURL);
@@ -87,7 +79,6 @@ render() {
               }>
               {this.props.selectedMarker === marker &&
                 <React.Fragment>
-
                   <InfoWindow
                     key={marker.created_at}>
                     <div className="infobox">
@@ -100,7 +91,8 @@ render() {
                         className="searchFormInput"
                         onChange={this.handleUserInputComment}
                         placeholder="Dates you were moored in this location, details of any correspondence with CRT (for example, who you spoke to on the phone), any particularly fine pubs in the vicinity..."
-                        /><br/>
+                        />
+                      <br/>
 
                       <button onClick={(e) => {
                         this.props.addComment(marker, this.state.comment)
@@ -128,24 +120,17 @@ render() {
                       />
                     </div>
                   </InfoWindow>
-
-
                 </React.Fragment>
               }
+
              <Sound
-                useConsole = {false}
-                url="saltyquack.mp3"
-                playStatus={this.state.firstLoad ? Sound.status.PLAYING : Sound.status.STOPPED}
-                onFinishedPlaying={this.handleFinish}
-              /> 
+              useConsole = {false}
+              url="saltyquack.mp3"
+              playStatus={this.state.firstLoad ? Sound.status.PLAYING : Sound.status.STOPPED}
+              onFinishedPlaying={this.handleFinish}
+            />
           </Marker>)
   }
 }
-
-// leave unless you have time to implement the comment model
-// <Comments
-//  comments={this.props.comments}
-//  ev={this.props.mySelectedEvent}/>
-
 
 export default MyMarker

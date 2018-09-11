@@ -18,13 +18,13 @@ class NavBar extends React.Component {
 
             <Divider hidden />
 
-              <AuthBox
-                current_user={this.props.current_user}
-                logIn={this.props.logIn}
-                signUp={this.props.signUp}
-                />
+            <AuthBox
+              current_user={this.props.current_user}
+              logIn={this.props.logIn}
+              signUp={this.props.signUp}
+              />
 
-          <Divider hidden />
+            <Divider hidden />
 
 
             <h4>
@@ -39,46 +39,41 @@ class NavBar extends React.Component {
               </p>
             </h4>
 
-
-
             { this.props.current_user?
               <React.Fragment>
-
-                <Modal trigger={<Button>How to use the map</Button>}>
-                    <Modal.Header>How to use the map</Modal.Header>
-                    <Modal.Content>
-                      <Modal.Description>
-                        <p>
-                          <li>Add a marker by clicking once on the map</li><br/>
-                          <li>Zoom in and out using the trackpad of buttons in the bottom right corner</li><br/>
-                          <li>Add a comment or upload a photo by clicking on an individual marker</li><br/>
-                        </p>
-                      </Modal.Description>
-                    </Modal.Content>
-                  </Modal>
-
-                  <Divider hidden />
-
-
-                  <Modal trigger={<Button>Help</Button>}>
-                    <Modal.Header>Need some more help?</Modal.Header>
-                    <Modal.Content>
-                      <Modal.Description>
-                          <p>
-                            Contact lucy.mitchell@flatironschool.com or the CRT for help with this app and boating respectively!
-                          </p>
-                      </Modal.Description>
-                    </Modal.Content>
-                  </Modal>
+                <Modal size="small" trigger={<Button>How to use the map</Button>}>
+                  <Modal.Header>How to use the map</Modal.Header>
+                  <Modal.Content>
+                    <Modal.Description>
+                      <p>
+                        <li>Add a marker by clicking once on the map</li><br/>
+                        <li>Zoom in and out using the trackpad or buttons in the bottom right corner</li><br/>
+                        <li>Add a comment or upload a photo by clicking on an individual marker</li><br/><br/>
+                      </p>
+                    </Modal.Description>
+                  </Modal.Content>
+                </Modal>
 
                   <Divider hidden />
 
+                <Modal size="small" trigger={<Button>Help</Button>}>
+                  <Modal.Header>Need some more help?</Modal.Header>
+                  <Modal.Content>
+                    <Modal.Description>
+                      <p>
+                        Contact lucy.mitchell@flatironschool.com or the CRT for help with this app and boating respectively!
+                      </p>
+                    </Modal.Description>
+                  </Modal.Content>
+                </Modal>
 
-                  <Button onClick={this.props.logOut}>Log out</Button>
+                <Divider hidden />
 
-                  <Divider hidden />
+                <Button onClick={this.props.logOut}>Log out</Button>
 
-                </React.Fragment>
+                <Divider hidden />
+
+              </React.Fragment>
               :
               null
             }

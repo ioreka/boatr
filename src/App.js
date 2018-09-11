@@ -4,10 +4,6 @@ import { createUser, loginUser, getCurrentUser, getUserMarkers, addUserMarker, u
 import { Icon, Button, Menu, Segment, Sidebar } from 'semantic-ui-react'
 import Map from './components/Map'
 import NavBar from './components/NavBar'
-import AlertBox from './components/AlertBox'
-
-
-// import { connect } from 'react-redux'
 
 class App extends Component {
 
@@ -20,7 +16,6 @@ class App extends Component {
   }
 
   //authorisation section
-
   signUp = (username, password) => {
     createUser(username, password).then(this.postAuth)
   }
@@ -43,7 +38,6 @@ class App extends Component {
     this.setState({
       current_user: null
     })
-    console.log("ya hittin it");
     this.props.history.push('/')
     localStorage.clear()
   }
@@ -73,7 +67,8 @@ class App extends Component {
       addUserMarker(this.state.current_user.id, localStorage.getItem('token'), body).then(data => {
       this.setState({
         myMarkers:[...this.state.myMarkers, data]
-      })})
+      })
+      })
     }
   }
 
@@ -118,7 +113,7 @@ class App extends Component {
       }
   }
 
-//comments section
+  //comments section
   addComment = (marker, comment) => {
     this.setComments(marker, comment)
   }
@@ -139,11 +134,10 @@ class App extends Component {
 
 
 
-
   //render section
   render() {
+
     this.fetchMyMarkers()
-    const isLoggedIn = this.state.current_user
     const visible = this.state.visible
     return (
       <div>
@@ -172,22 +166,25 @@ class App extends Component {
 
           <Sidebar.Pusher dimmed={visible}>
             <Segment basic>
-            <Button size='mini' floated="left" onClick={this.handleButtonClick}><Icon name='angle double left'/></Button>
+              <Button animated='fade' size='mini' floated="left" onClick={this.handleButtonClick}>
+                <Button.Content visible><Icon name='angle double left'/></Button.Content>
+                <Button.Content hidden>Menu</Button.Content>
+              </Button>
+
               <Map
-              saveToMyMarkers={this.saveToMyMarkers}
-              myMarkers={this.state.myMarkers}
-              sectionMarkers={this.state.sectionMarkers}
-              updateUserMarker={this.updateUserMarker}
-              deleteUserMarker={this.deleteUserMarker}
-              addComment={this.addComment}
-              current_user={this.state.current_user}
+                saveToMyMarkers={this.saveToMyMarkers}
+                myMarkers={this.state.myMarkers}
+                sectionMarkers={this.state.sectionMarkers}
+                updateUserMarker={this.updateUserMarker}
+                deleteUserMarker={this.deleteUserMarker}
+                addComment={this.addComment}
+                current_user={this.state.current_user}
               />
-              {isLoggedIn ? null : <AlertBox />}
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-        </div>
-    );
+      </div>
+    )
   }
 }
 
