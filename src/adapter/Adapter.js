@@ -1,4 +1,4 @@
-const baseURL = `https://boatr-backend.herokuapp.com`
+const baseURL = `https://boatr-backend.herokuapp.com/api/v1`
 
 
 const createUser = (username, password) => {
