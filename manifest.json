@@ -1,0 +1,21 @@
+{
+  "short_name": "Boatr",
+  "name": "Boatr",
+  "icons": [
+    {
+      "src": "/src/images/boatr192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/src/images/boatr512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/http://localhost:3000/home",
+  "background_color": "#47BEC5",
+  "display": "standalone",
+  "scope": "/http://localhost:3000/",
+  "theme_color": "#47BEC5"
+}

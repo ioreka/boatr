@@ -137,9 +137,7 @@ render() {
                 url="saltyquack.mp3"
                 playStatus={this.state.firstLoad ? Sound.status.PLAYING : Sound.status.STOPPED}
                 onFinishedPlaying={this.handleFinish}
-              /> :
-
-              null}
+              /> 
           </Marker>)
   }
 }
