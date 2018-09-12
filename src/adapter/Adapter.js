@@ -66,7 +66,7 @@ const updateMarker = (id, token, marker, newCoordinates) => {
     },
     method: 'PATCH',
     body: JSON.stringify({
-      marker: {newCoordinates}
+      marker: {...newCoordinates}
     })
   }).then(resp => resp.json())
 }
