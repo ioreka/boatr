@@ -89,14 +89,11 @@ class App extends Component {
   }
 
   updateUserMarker = (e, marker) => {
-    console.log("ya hittin tha update fuction");
     let newCoordinates = {lat: e.latLng.lat(), lng: e.latLng.lng()}
-    console.log("newCoordinates", newCoordinates);
     if (this.state.current_user) {
       updateMarker(this.state.current_user.id, localStorage.getItem('token'), marker, newCoordinates).then(newCoordinates => {
         let newMarkers = this.state.myMarkers.filter(duck => duck.id !== marker.id)
         newMarkers = [...newMarkers, newCoordinates]
-        console.log("new markers", newMarkers);
       this.setState({
         myMarkers: newMarkers
       })})
@@ -122,7 +119,6 @@ class App extends Component {
   }
 
   setComments = (marker, comment) => {
-    console.log("comment", comment);
     setMarkerComment(this.state.current_user.id, localStorage.getItem('token'), marker, comment)
     .then(new_comment => {
       this.setState({

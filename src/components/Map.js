@@ -28,7 +28,6 @@ class MyMap extends React.Component {
 
 
    handleToggleClose = () => {
-     console.log("ya hittin it");
        this.setState({
            isOpen: false,
            selectedMarker: false
