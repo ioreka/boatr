@@ -55,4 +55,4 @@ The decision was taken to not implement a location-grabbing feature as it could 
 An option to work on this in the future could be to drop a pin based on location, ask the user to confirm the location is correct, and be able to move the map (not the pin) to the right location.
 
 
-If reading this on github, you can find the Heroku-hosted version of this app [here](https://boatr-frontend.herokuapp.com/home).
+If reading this on GitHub, you can find the Heroku-hosted version of this app at [london-boatr.herokuapp.com](https://london-boatr.herokuapp.com).
